@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Estilos para todo el documento */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     background-color: #f0ebf8;
 }
 
+/* Estilos para el formulario*/
 form {
     max-width: 500px;
     margin: 0 auto;
@@ -75,8 +80,60 @@ select#pais-residencia {
     font-size: 1.1rem;
 }
 
+/* Estilos para campos requeridos */
 label[for]:after {
     content: "*";
     color: red;
     margin-left: 4px;
+}
+
+/* Estilos para la tabla */
+#registros-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 50px auto;
+    text-align: left;
+    overflow-x: auto;
+}
+
+#registros-table th {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 15px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+#registros-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#registros-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Estilos para el botón de mostrar registros */
+#mostrar-registros {
+    display: block;
+    margin-top: 20px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#mostrar-registros:hover {
+    background-color: #0069d9;
+}
+
+/* Estilos para el contenedor del botón */
+.usuarios-registrados {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
 }

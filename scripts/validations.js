@@ -42,7 +42,10 @@ form.addEventListener('submit', (event) => {
         return;
     }
 
-    // Guardar datos del usuario en localStorage
+    // Obtener lista de usuarios existente del localStorage
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Crear objeto de usuario
     let usuario = {
         nombreCompleto: nombreCompleto.value,
         fechaNacimiento: fechaNacimiento.value,
@@ -50,8 +53,54 @@ form.addEventListener('submit', (event) => {
         genero: genero.value,
         paisResidencia: paisResidencia.value,
     };
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    // Agregar usuario a la lista
+    usuarios.push(usuario);
+
+    // Guardar lista de usuarios en localStorage
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
     // Mostrar mensaje de confirmación
     alert('Registro exitoso!');
+});
+const botonMostrarRegistros = document.querySelector('#mostrar-registros');
+
+botonMostrarRegistros.addEventListener('click', () => {
+    const registros = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    const tablaRegistros = document.createElement('table');
+    tablaRegistros.classList.add('table', 'usuarios-table');
+    const encabezadoTabla = document.createElement('thead');
+    const filaEncabezado = document.createElement('tr');
+    const encabezadoId = document.createElement('th');
+    const encabezadoNombre = document.createElement('th');
+    const encabezadoEmail = document.createElement('th');
+
+    encabezadoId.textContent = 'ID';
+    encabezadoNombre.textContent = 'Nombre completo';
+    encabezadoEmail.textContent = 'Correo electrónico';
+
+    filaEncabezado.appendChild(encabezadoId);
+    filaEncabezado.appendChild(encabezadoNombre);
+    filaEncabezado.appendChild(encabezadoEmail);
+    encabezadoTabla.appendChild(filaEncabezado);
+    tablaRegistros.appendChild(encabezadoTabla);
+
+    registros.forEach((registro, index) => {
+        const fila = document.createElement('tr');
+        const celdaId = document.createElement('td');
+        const celdaNombre = document.createElement('td');
+        const celdaEmail = document.createElement('td');
+
+        celdaId.textContent = index + 1;
+        celdaNombre.textContent = registro.nombreCompleto;
+        celdaEmail.textContent = registro.email;
+
+        fila.appendChild(celdaId);
+        fila.appendChild(celdaNombre);
+        fila.appendChild(celdaEmail);
+        tablaRegistros.appendChild(fila);
+    });
+
+    document.body.appendChild(tablaRegistros);
 });
