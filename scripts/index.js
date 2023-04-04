@@ -16,7 +16,10 @@ form.addEventListener("submit", (event) => {
         !fechaNacimiento.value ||
         !email.value ||
         !password.value ||
-        !confirmPass.value
+        !confirmPass.value ||
+        !genero.value ||
+        !paisResidencia.value
+
     ) {
         alert("Todos los campos marcados con * son obligatorios.");
         return;
@@ -47,6 +50,8 @@ form.addEventListener("submit", (event) => {
         alert("Las contraseñas no coinciden.");
         return;
     }
+
+    // Validación de contraseña no valida
 
     // Obtener lista de usuarios existente del localStorage
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -88,20 +93,21 @@ tablaRegistros.style.margin = 'auto';
 const registros = JSON.parse(localStorage.getItem('usuarios')) || [];
 
 if (registros.length === 0) {
-  const mensaje = document.createElement('p');
-  mensaje.innerHTML = 'No hay usuarios registrados.';
-  contenedor.appendChild(mensaje);
+    //Podria ser un Alert
+    const mensaje = document.createElement('p');
+    mensaje.innerHTML = 'No hay usuarios registrados.';
+    contenedor.appendChild(mensaje);
 } else {
-  registros.forEach((registro, index) => {
-    const fila = document.createElement('tr');
-    fila.innerHTML = `<td>${index + 1}</td><td>${registro.nombreCompleto}</td><td>${registro.email}</td>`;
-    tablaRegistros.appendChild(fila);
-  });
+    registros.forEach((registro, index) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `<td>${index + 1}</td><td>${registro.nombreCompleto}</td><td>${registro.email}</td>`;
+        tablaRegistros.appendChild(fila);
+    });
 
-  tablaRegistros.style.display = 'none';
+    tablaRegistros.style.display = 'none';
 
-  const botonMostrarRegistros = document.querySelector('#mostrar-registros');
-  botonMostrarRegistros.addEventListener('click', () => {
-    tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
-  });
+    const botonMostrarRegistros = document.querySelector('#mostrar-registros');
+    botonMostrarRegistros.addEventListener('click', () => {
+        tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
+    });
 }

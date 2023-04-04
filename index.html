@@ -15,7 +15,7 @@
 <body>
     <div class="container-fluid">
         <form id="registro-form">
-            <h1 class="text-center mb-3">Registrarse</h1>
+            <h1 class="text-center mb-3">Formulario</h1>
             <div class="form-group">
                 <label for="nombre-completo">Nombre completo</label>
                 <input type="text" id="nombre-completo" name="nombre-completo" class="form-control" required />
@@ -44,6 +44,7 @@
             <div class="form-group">
                 <label for="genero">Género</label>
                 <select id="genero" name="genero" class="form-control" required>
+                    <option value="" selected disabled>Seleccione su género</option>
                     <option value="masculino">Masculino</option>
                     <option value="femenino">Femenino</option>
                     <option value="otro">Otro</option>
@@ -53,6 +54,7 @@
             <div class="form-group">
                 <label for="pais-residencia">País de residencia</label>
                 <select id="pais-residencia" name="pais-residencia" class="form-control" required>
+                    <option value="" selected disabled>Seleccione su país de residencia</option>
                     <option value="mexico">México</option>
                     <option value="estados-unidos">Estados Unidos</option>
                     <option value="canada">Canadá</option>
@@ -60,17 +62,18 @@
                 </select>
             </div>
 
+
             <button type="submit" class="btn btn-success">Registrarse</button>
         </form>
 
         <div class="text-center mt-3 mb-2">
             <button id="mostrar-registros" class="btn btn-info">
-                Mostrar registros
+                Mostrar Usuarios Registrados
             </button>
         </div>
     </div>
 
-    <script src="./scripts/validations.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
