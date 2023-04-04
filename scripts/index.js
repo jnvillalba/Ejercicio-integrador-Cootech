@@ -19,7 +19,6 @@ form.addEventListener("submit", (event) => {
         !confirmPass.value ||
         !genero.value ||
         !paisResidencia.value
-
     ) {
         alert("Todos los campos marcados con * son obligatorios.");
         return;
@@ -45,18 +44,14 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
-    // Validación de contraseñas coincidentes
+    // Validación de contraseña
     if (password.value !== confirmPass.value) {
         alert("Las contraseñas no coinciden.");
         return;
     }
 
-    // Validación de contraseña no valida
-
-    // Obtener lista de usuarios existente del localStorage
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // Crear objeto de usuario
     let usuario = {
         nombreCompleto: nombreCompleto.value,
         fechaNacimiento: fechaNacimiento.value,
@@ -65,14 +60,12 @@ form.addEventListener("submit", (event) => {
         paisResidencia: paisResidencia.value,
     };
 
-    // Agregar usuario a la lista
     usuarios.push(usuario);
 
-    // Guardar lista de usuarios en localStorage
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    // Mostrar mensaje de confirmación
     alert("Registro exitoso!");
+    actualizarTablaRegistros();
 });
 
 // Mostrar Tabla
@@ -93,10 +86,7 @@ tablaRegistros.style.margin = 'auto';
 const registros = JSON.parse(localStorage.getItem('usuarios')) || [];
 
 if (registros.length === 0) {
-    //Podria ser un Alert
-    const mensaje = document.createElement('p');
-    mensaje.innerHTML = 'No hay usuarios registrados.';
-    contenedor.appendChild(mensaje);
+    alert("Las contraseñas no coinciden.");
 } else {
     registros.forEach((registro, index) => {
         const fila = document.createElement('tr');
@@ -110,4 +100,31 @@ if (registros.length === 0) {
     botonMostrarRegistros.addEventListener('click', () => {
         tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
     });
+}
+
+function actualizarTablaRegistros() {
+    // Obtener lista de usuarios existente del localStorage
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    // Limpiar contenido previo de la tabla
+    while (tablaRegistros.firstChild) {
+        tablaRegistros.removeChild(tablaRegistros.firstChild);
+    }
+
+    // Crear encabezado de tabla
+    const encabezadoTabla = document.createElement('thead');
+    const filaEncabezado = document.createElement('tr');
+    filaEncabezado.innerHTML = '<th>N°</th><th>Nombre completo</th><th>Correo electrónico</th>';
+    encabezadoTabla.appendChild(filaEncabezado);
+    tablaRegistros.appendChild(encabezadoTabla);
+
+    // Crear filas de registros
+    const cuerpoTabla = document.createElement('tbody');
+    usuarios.forEach((registro, index) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `<td>${index + 1}</td><td>${registro.nombreCompleto}</td><td>${registro.email}</td>`;
+        cuerpoTabla.appendChild(fila);
+    });
+
+    tablaRegistros.appendChild(cuerpoTabla);
 }
