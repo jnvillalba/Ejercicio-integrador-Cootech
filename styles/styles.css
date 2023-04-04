@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0ebf8;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #eee;
+    font-size: 1.1rem;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+/* Estilos específicos para los campos de contraseña */
+input[type="password"] {
+    font-size: 1.2rem;
+}
+
+input[type="password"]:focus {
+    background-color: #ddd;
+}
+
+/* Estilos específicos para el campo de género */
+select#genero {
+    font-size: 1.1rem;
+}
+
+/* Estilos específicos para el campo de país de residencia */
+select#pais-residencia {
+    font-size: 1.1rem;
+}
+
+label[for]:after {
+    content: "*";
+    color: red;
+    margin-left: 4px;
+}
