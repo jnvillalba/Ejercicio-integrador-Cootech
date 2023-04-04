@@ -71,7 +71,6 @@ form.addEventListener("submit", (event) => {
 });
 
 // Mostrar Tabla
-
 const tablaRegistros = document.createElement('table');
 tablaRegistros.classList.add('table', 'table-striped', 'table-hover');
 const encabezadoTabla = document.createElement('thead');
@@ -88,15 +87,21 @@ tablaRegistros.style.margin = 'auto';
 
 const registros = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-registros.forEach((registro, index) => {
+if (registros.length === 0) {
+  const mensaje = document.createElement('p');
+  mensaje.innerHTML = 'No hay usuarios registrados.';
+  contenedor.appendChild(mensaje);
+} else {
+  registros.forEach((registro, index) => {
     const fila = document.createElement('tr');
     fila.innerHTML = `<td>${index + 1}</td><td>${registro.nombreCompleto}</td><td>${registro.email}</td>`;
     tablaRegistros.appendChild(fila);
-});
+  });
 
-tablaRegistros.style.display = 'none';
+  tablaRegistros.style.display = 'none';
 
-const botonMostrarRegistros = document.querySelector('#mostrar-registros');
-botonMostrarRegistros.addEventListener('click', () => {
+  const botonMostrarRegistros = document.querySelector('#mostrar-registros');
+  botonMostrarRegistros.addEventListener('click', () => {
     tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
-});
+  });
+}
