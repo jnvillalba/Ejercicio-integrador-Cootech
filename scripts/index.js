@@ -68,55 +68,31 @@ form.addEventListener("submit", (event) => {
     actualizarTablaRegistros();
 });
 
-// Mostrar Tabla
-const tablaRegistros = document.createElement('table');
-tablaRegistros.classList.add('table', 'table-striped', 'table-hover');
-const encabezadoTabla = document.createElement('thead');
-const filaEncabezado = document.createElement('tr');
+// Crear tabla
+let tablaRegistros;
 
-filaEncabezado.innerHTML = '<th>N°</th><th>Nombre completo</th><th>Correo electrónico</th>';
-encabezadoTabla.appendChild(filaEncabezado);
-tablaRegistros.appendChild(encabezadoTabla);
+function crearTablaRegistros() {
+    tablaRegistros = document.createElement('table');
+    tablaRegistros.classList.add('table', 'table-striped', 'table-hover');
+    crearEncabezado();
 
-const contenedor = document.querySelector('.container-fluid');
-contenedor.appendChild(tablaRegistros);
+    const contenedor = document.querySelector('.container-fluid');
+    contenedor.appendChild(tablaRegistros);
 
-tablaRegistros.style.margin = 'auto';
-
-const registros = JSON.parse(localStorage.getItem('usuarios')) || [];
-
-if (registros.length === 0) {
-    alert("Las contraseñas no coinciden.");
-} else {
-    registros.forEach((registro, index) => {
-        const fila = document.createElement('tr');
-        fila.innerHTML = `<td>${index + 1}</td><td>${registro.nombreCompleto}</td><td>${registro.email}</td>`;
-        tablaRegistros.appendChild(fila);
-    });
-
+    tablaRegistros.style.margin = 'auto';
     tablaRegistros.style.display = 'none';
-
-    const botonMostrarRegistros = document.querySelector('#mostrar-registros');
-    botonMostrarRegistros.addEventListener('click', () => {
-        tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
-    });
+    return tablaRegistros;
 }
 
+// Actualizar tabla
 function actualizarTablaRegistros() {
-    // Obtener lista de usuarios existente del localStorage
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // Limpiar contenido previo de la tabla
     while (tablaRegistros.firstChild) {
         tablaRegistros.removeChild(tablaRegistros.firstChild);
     }
 
-    // Crear encabezado de tabla
-    const encabezadoTabla = document.createElement('thead');
-    const filaEncabezado = document.createElement('tr');
-    filaEncabezado.innerHTML = '<th>N°</th><th>Nombre completo</th><th>Correo electrónico</th>';
-    encabezadoTabla.appendChild(filaEncabezado);
-    tablaRegistros.appendChild(encabezadoTabla);
+    crearEncabezado();
 
     // Crear filas de registros
     const cuerpoTabla = document.createElement('tbody');
@@ -127,4 +103,21 @@ function actualizarTablaRegistros() {
     });
 
     tablaRegistros.appendChild(cuerpoTabla);
+}
+
+crearTablaRegistros();
+
+const botonMostrarRegistros = document.querySelector('#mostrar-registros');
+botonMostrarRegistros.addEventListener('click', () => {
+    tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
+});
+
+actualizarTablaRegistros();
+
+function crearEncabezado() {
+    const encabezadoTabla = document.createElement('thead');
+    const filaEncabezado = document.createElement('tr');
+    filaEncabezado.innerHTML = '<th>N°</th><th>Nombre completo</th><th>Correo electrónico</th>';
+    encabezadoTabla.appendChild(filaEncabezado);
+    tablaRegistros.appendChild(encabezadoTabla);
 }
