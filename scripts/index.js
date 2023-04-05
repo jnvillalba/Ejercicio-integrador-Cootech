@@ -109,7 +109,13 @@ crearTablaRegistros();
 
 const botonMostrarRegistros = document.querySelector('#mostrar-registros');
 botonMostrarRegistros.addEventListener('click', () => {
-    tablaRegistros.style.display = tablaRegistros.style.display === 'none' ? 'table' : 'none';
+    if (tablaRegistros.style.display === 'none') {
+        tablaRegistros.style.display = 'table';
+        botonMostrarRegistros.textContent = 'Ocultar Usuarios Registrados';
+    } else {
+        tablaRegistros.style.display = 'none';
+        botonMostrarRegistros.textContent = 'Mostrar Usuarios Registrados';
+    }
 });
 
 actualizarTablaRegistros();
